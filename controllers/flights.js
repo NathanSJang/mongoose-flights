@@ -26,7 +26,6 @@ function create(req, res) {
   const flight = new Flights(req.body);
   flight.save(function(err) {
     if(err) return res.render('flights/new');
-    console.log(flight);
     res.redirect('/flights');
   })
 }
@@ -34,7 +33,7 @@ function create(req, res) {
 function show(req, res) {
   Flights.findById(req.params.id, function(err, flight) {
     Ticket.find({flight: flight._id}, function(err, tickets) {
-      console.log(tickets);
+      console.log(flight);
       res.render('flights/show', { title: 'Flight Detail', flight, tickets });
     })
   })
